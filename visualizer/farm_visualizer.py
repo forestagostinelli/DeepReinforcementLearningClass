@@ -327,14 +327,15 @@ class InteractiveFarm:
 
             self.grid_arrows.append(grid_arrows_row)
 
-    def set_policy(self, policy: Dict[FarmState, List[float]]):
+    def set_policy(self, policy: Dict[FarmState, List[float]], append: bool = False):
         grid_dim_x, grid_dim_y = self.env.grid_shape
 
-        for grid_arrows_row in self.grid_arrows:
-            for grid_arrow in grid_arrows_row:
-                self.board.delete(grid_arrow)
+        if not append:
+            for grid_arrows_row in self.grid_arrows:
+                for grid_arrow in grid_arrows_row:
+                    self.board.delete(grid_arrow)
 
-        self.grid_arrows: List[List[List]] = []
+            self.grid_arrows: List[List[List]] = []
         for pos_i in range(grid_dim_x):
             grid_arrows_row: List = []
             for pos_j in range(grid_dim_y):

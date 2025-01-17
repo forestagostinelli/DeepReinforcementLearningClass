@@ -29,8 +29,8 @@ class FarmState(State):
 
 
 class FarmGridWorld(Environment):
-    def __init__(self, grid_shape: Tuple[int, int], rand_right: float, grid: Optional = None):
-        super().__init__()
+    def __init__(self, env_name: str, grid_shape: Tuple[int, int], rand_right: float, grid: Optional = None):
+        super().__init__(env_name)
 
         self.rand_right_prob: float = rand_right
 
@@ -39,10 +39,6 @@ class FarmGridWorld(Environment):
             self.goal_idx: Tuple[int, int] = mask_to_idxs(grid, 2)[0]
             self.plant_idxs: List[Tuple[int, int]] = mask_to_idxs(grid, 3)
             self.rocks_idxs: List[Tuple[int, int]] = mask_to_idxs(grid, 4)
-
-    @property
-    def env_name(self) -> str:
-        return "aifarm"
 
     def get_actions(self, state: FarmState) -> List[int]:
         return list(range(4))
@@ -121,7 +117,8 @@ class FarmGridWorld(Environment):
         agent_idxs_0 = np.random.randint(0, self.grid_shape[0], size=num_states)
         agent_idxs_1 = np.random.randint(0, self.grid_shape[1], size=num_states)
         for i in range(num_states):
-            state = FarmState((agent_idxs_0[i], agent_idxs_1[i]), self.goal_idx, self.plant_idxs, self.rocks_idxs)
+            state = FarmState((int(agent_idxs_0[i]), int(agent_idxs_1[i])), self.goal_idx, self.plant_idxs,
+                              self.rocks_idxs)
 
             states.append(state)
 

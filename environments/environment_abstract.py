@@ -14,10 +14,8 @@ class State(ABC):
 
 
 class Environment(ABC):
-    @property
-    @abstractmethod
-    def env_name(self) -> str:
-        pass
+    def __init__(self, env_name: str):
+        self.env_name = env_name
 
     @abstractmethod
     def get_actions(self, state: State) -> List[int]:

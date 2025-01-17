@@ -65,8 +65,8 @@ class NPuzzle(Environment):
     moves: List[str] = ['U', 'D', 'L', 'R']
     moves_rev: List[str] = ['D', 'U', 'R', 'L']
 
-    def __init__(self, dim: int):
-        super().__init__()
+    def __init__(self, env_name: str, dim: int):
+        super().__init__(env_name)
 
         self.dim: int = dim
 
@@ -79,10 +79,6 @@ class NPuzzle(Environment):
         self.one_hot_convert = np.eye(self.dim ** 2).astype(int)
 
         self.num_moves: int = 4
-
-    @property
-    def env_name(self) -> str:
-        return f"puzzle{(self.dim ** 2) -1}"
 
     def sample_transition(self, state: NPuzzleState, action: int) -> Tuple[NPuzzleState, float]:
         # initialize
