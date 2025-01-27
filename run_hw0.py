@@ -11,7 +11,7 @@ def main():
     args = parser.parse_args()
 
     grid = load_grid(args.map)
-    env: FarmGridWorld = FarmGridWorld(grid.shape, 0.0)
+    env: FarmGridWorld = FarmGridWorld("aifarm", grid.shape, 0.0)
 
     viz: InteractiveFarm = InteractiveFarm(env, grid)
 
