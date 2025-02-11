@@ -38,9 +38,16 @@ def get_environment(env_name: str):
                 states.append(state)
     elif env_name == "puzzle8":
         from environments.n_puzzle import NPuzzle
-        env = NPuzzle(3)
+        env = NPuzzle(env_name, 3, False)
 
-        states = pickle.load(open("data/puzzle8.pkl", "rb"))['states']
+        states = []
+
+        viz = None
+    elif env_name == "puzzle8_rand":
+        from environments.n_puzzle import NPuzzle
+        env = NPuzzle(env_name, 3, True)
+
+        states = []
 
         viz = None
     else:
