@@ -1,6 +1,5 @@
 from typing import List
 import re
-import pickle
 from environments.environment_abstract import Environment
 import numpy as np
 
@@ -27,14 +26,15 @@ def get_environment(env_name: str):
             rand_right = float(farm_regex.group(2))
 
         env: FarmGridWorld = FarmGridWorld(env_name, grid.shape, rand_right, grid)
-        viz = InteractiveFarm(env, grid)
+        # viz = InteractiveFarm(env, grid)
+        viz = None
 
         # get states
         states: List[FarmState] = []
 
         for pos_i in range(grid.shape[0]):
             for pos_j in range(grid.shape[1]):
-                state: FarmState = FarmState((pos_i, pos_j), viz.goal_idx, viz.plant_idxs, viz.rocks_idxs)
+                state: FarmState = FarmState((pos_i, pos_j), env.goal_idx, env.plant_idxs, env.rocks_idxs)
                 states.append(state)
     elif env_name == "puzzle8":
         from environments.n_puzzle import NPuzzle
