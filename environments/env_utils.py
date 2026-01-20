@@ -26,8 +26,8 @@ def get_environment(env_name: str):
             rand_right = float(farm_regex.group(2))
 
         env: FarmGridWorld = FarmGridWorld(env_name, grid.shape, rand_right, grid)
-        # viz = InteractiveFarm(env, grid)
-        viz = None
+        viz = InteractiveFarm(env, grid)
+        # viz = None
 
         # get states
         states: List[FarmState] = []
